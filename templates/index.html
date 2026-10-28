@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Rank2College — AKTU College Predictor{% endblock %}
+{% block content %}
+<section class="hero-section">
+    <div class="container-wide hero-grid">
+        <div class="hero-copy">
+            <div class="eyebrow"><span class="pulse-dot"></span> AKTU College Predictor</div>
+            <h1>Turn your <span>rank</span> into a smarter college shortlist.</h1>
+            <p class="hero-text">Enter your JEE rank and basic counselling details to see colleges and branches you may be eligible for based on previous AKTU cutoff data.</p>
+            <div class="hero-points">
+                <span>✓ Rank-based prediction</span>
+                <span>✓ Round-wise results</span>
+                <span>✓ Branch & college filters</span>
+            </div>
+        </div>
+
+        <div class="predictor-card" id="predictor">
+            <div class="card-kicker">START PREDICTING</div>
+            <h2>Find your AKTU colleges</h2>
+            <p class="card-subtitle">Fill in your counselling details below.</p>
+            <form method="POST" action="{{ url_for('predict') }}" class="predictor-form">
+                <div class="field full-field">
+                    <label for="rank">JEE Main Rank</label>
+                    <input id="rank" type="number" name="rank" min="1" placeholder="e.g. 432000" required>
+                </div>
+
+                <div class="form-grid-2">
+                    <div class="field">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select category</option>
+                            <option value="OPEN">General</option>
+                            <option value="BC">BC / OBC</option>
+                            <option value="SC">SC</option>
+                            <option value="ST">ST</option>
+                            <option value="EWS">EWS</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field full-field">
+                    <label for="home_state">Home State</label>
+                    <select id="home_state" name="home_state" required>
+                        <option value="">Select home state</option>
+                        <option value="UP">Uttar Pradesh</option>
+                        <option value="Other">Other State</option>
+                    </select>
+                </div>
+
+                <button class="primary-btn" type="submit">Predict My Colleges <span>→</span></button>
+                <p class="form-note">Your inputs are used to generate the prediction for this session.</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="feature-section" id="about">
+    <div class="container-wide">
+        <div class="section-heading">
+            <div class="eyebrow">WHY RANK2COLLEGE</div>
+            <h2>Everything you need to read your result quickly.</h2>
+            <p>Designed to make a large AKTU cutoff dataset easier to understand and compare.</p>
+        </div>
+        <div class="feature-grid">
+            <article class="feature-card"><div class="feature-icon">01</div><h3>Rank-based prediction</h3><p>Get Safe, Moderate and Dream classifications using your rank and cutoff data.</p></article>
+            <article class="feature-card"><div class="feature-icon">02</div><h3>Useful filters</h3><p>Narrow results by counselling round, college, branch and subcategory.</p></article>
+            <article class="feature-card"><div class="feature-icon">03</div><h3>Easy browsing</h3><p>Results are paginated so you can scan a clean set of colleges at a time.</p></article>
+        </div>
+    </div>
+</section>
+
+<section class="info-section" id="contact">
+    <div class="container-wide info-card">
+        <div><div class="eyebrow">ABOUT THE PREDICTION</div><h2>Use the result as a shortlist, not a guarantee.</h2></div>
+        <p>Predictions are based on previous AKTU counselling data. Actual seat allotment depends on the official counselling process, seat availability, category, quota and the current year's cutoffs.</p>
+    </div>
+</section>
+{% endblock %}

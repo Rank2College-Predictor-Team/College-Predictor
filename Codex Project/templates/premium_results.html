@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <div class="page-header">
+            <div>
+                <span class="section-kicker">Premium Results</span>
+                <h1 class="page-title">Advanced prediction workspace</h1>
+                <p class="page-subtitle">Use premium insights to plan better choices, compare probabilities, and export a polished report.</p>
+            </div>
+            <div class="premium-cta-card">
+                <h3>Premium tools</h3>
+                <ul class="feature-list">
+                    <li>Probability analysis</li>
+                    <li>Choice filling order</li>
+                    <li>Downloadable PDF report</li>
+                </ul>
+                <a href="{{ url_for('download_pdf') }}" class="button button--primary button--full">Download PDF Report</a>
+            </div>
+        </div>
+
+        {% if predictions %}
+            <section class="panel stack-section">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">Probability analysis</span>
+                        <h2>High-confidence opportunities</h2>
+                    </div>
+                    <a href="{{ url_for('results') }}" class="button button--ghost">Back to Free Results</a>
+                </div>
+
+                <div class="card-grid results-grid">
+                    {% for item in predictions %}
+                        <article class="result-card result-card--premium">
+                            <div class="result-card__top">
+                                <span class="tag tag--{{ item.status|lower }}">{{ item.status }}</span>
+                                <span class="probability">{{ item.probability }}</span>
+                            </div>
+
+                            <div class="result-card__body">
+                                <h3>{{ item.college_name }}</h3>
+                                <p class="branch">{{ item.branch }}</p>
+                            </div>
+
+                            <div class="result-stats">
+                                <div class="stat-box">
+                                    <span class="label">Closing Rank</span>
+                                    <strong>{{ item.closing_rank }}</strong>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="label">Subcategory</span>
+                                    <strong>{{ item.subcategory_label }}</strong>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="label">Seat Type</span>
+                                    <strong>{{ item.seat_gender }}</strong>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="label">Round</span>
+                                    <strong>{{ item.round }}</strong>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="panel stack-section">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">Choice order</span>
+                        <h2>Suggested filling sequence</h2>
+                    </div>
+                </div>
+
+                <div class="choice-list">
+                    {% for item in choice_order[:20] %}
+                        <article class="choice-card">
+                            <div class="choice-number">{{ item.choice_number }}</div>
+                            <div class="choice-content">
+                                <h4>{{ item.college_name }}</h4>
+                                <p>{{ item.branch }}</p>
+                            </div>
+                            <div class="choice-tags">
+                                <span class="probability">{{ item.probability }}</span>
+                                <span class="pill">{{ item.subcategory_label }}</span>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+        {% else %}
+            <section class="panel">
+                <div class="empty-state">
+                    <h3>No premium recommendations available</h3>
+                    <p>Your current inputs did not return any matching colleges in the dataset.</p>
+                    <a href="{{ url_for('index') }}" class="button button--primary">Try Another Search</a>
+                </div>
+            </section>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

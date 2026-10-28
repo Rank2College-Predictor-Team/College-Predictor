@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="panel">
+    <div class="section-heading">
+        <div>
+            <p class="section-kicker">Admin Dashboard</p>
+            <h2>AKTU predictor analytics</h2>
+        </div>
+        <p class="section-copy">Live lightweight SaaS metrics powered by session tracking and JSON analytics storage.</p>
+    </div>
+
+    <div class="stats-grid">
+        <article class="stats-card">
+            <span class="stats-card__label">Total Users</span>
+            <strong class="stats-card__value">{{ total_users }}</strong>
+            <p>Unique browser sessions tracked.</p>
+        </article>
+
+        <article class="stats-card">
+            <span class="stats-card__label">Total Predictions</span>
+            <strong class="stats-card__value">{{ total_predictions }}</strong>
+            <p>All prediction submissions recorded.</p>
+        </article>
+
+        <article class="stats-card">
+            <span class="stats-card__label">Top Category</span>
+            <strong class="stats-card__value">{{ most_selected_category[0] }}</strong>
+            <p>{{ most_selected_category[1] }} searches from this category.</p>
+        </article>
+    </div>
+
+    <div class="admin-grid">
+        <section class="dashboard-card">
+            <div class="dashboard-card__header">
+                <h3>Popular Colleges</h3>
+                <span class="pill">Top predicted institutes</span>
+            </div>
+            {% if top_colleges %}
+                <div class="metric-list">
+                    {% for college_name, count in top_colleges %}
+                        <div class="metric-row">
+                            <span>{{ college_name }}</span>
+                            <strong>{{ count }}</strong>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-copy">No college analytics yet.</p>
+            {% endif %}
+        </section>
+
+        <section class="dashboard-card">
+            <div class="dashboard-card__header">
+                <h3>Most Searched Rank Ranges</h3>
+                <span class="pill">Demand buckets</span>
+            </div>
+            {% if rank_distribution %}
+                <div class="metric-list">
+                    {% for label, count in rank_distribution %}
+                        <div class="metric-row">
+                            <span>{{ label }}</span>
+                            <strong>{{ count }}</strong>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-copy">No rank trends available yet.</p>
+            {% endif %}
+        </section>
+
+        <section class="dashboard-card">
+            <div class="dashboard-card__header">
+                <h3>Category Distribution</h3>
+                <span class="pill">User intent</span>
+            </div>
+            {% if category_distribution %}
+                <div class="metric-list">
+                    {% for label, count in category_distribution %}
+                        <div class="metric-row">
+                            <span>{{ label }}</span>
+                            <strong>{{ count }}</strong>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-copy">No category data recorded yet.</p>
+            {% endif %}
+        </section>
+
+        <section class="dashboard-card">
+            <div class="dashboard-card__header">
+                <h3>Recent Prediction Activity</h3>
+                <span class="pill">Latest searches</span>
+            </div>
+            {% if recent_predictions %}
+                <div class="metric-list">
+                    {% for item in recent_predictions %}
+                        <div class="activity-row">
+                            <div>
+                                <strong>Rank {{ item.rank }}</strong>
+                                <p>{{ item.category }} • {{ item.rank_range }}</p>
+                            </div>
+                            <div class="activity-meta">
+                                <strong>{{ item.results_count }}</strong>
+                                <span>results</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-copy">No recent searches yet.</p>
+            {% endif %}
+        </section>
+    </div>
+</section>
+{% endblock %}

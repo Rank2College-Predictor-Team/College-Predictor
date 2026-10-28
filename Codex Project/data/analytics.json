@@ -1,0 +1,87 @@
+{
+  "users": [
+    "5fffcbd1-d1fb-435c-ab7b-1f1b9c4b24cc",
+    "0dc2dca7-4f16-47a2-b7b4-d3c4b8bf3ce9",
+    "69507b69-2f4c-4cbf-b4a4-53ec212cf1b0"
+  ],
+  "predictions": [
+    {
+      "user_id": "5fffcbd1-d1fb-435c-ab7b-1f1b9c4b24cc",
+      "rank": 100000,
+      "category": "ST",
+      "timestamp": "2026-04-01T17:34:53.378939Z",
+      "results_count": 114,
+      "rank_range": "0 - 1 Lakh",
+      "top_colleges": [
+        "S.R.INSTITUTE OF MANAGEMENT & TECHNOLOGY,LUCKNOW",
+        "LUCKNOW UNIVERSITY, LUCKNOW",
+        "NITRA TECHNICAL CAMPUS,GHAZIABAD",
+        "BABU BANARASI DAS INSTITUTE OF TECHNOLOGY AND MANAGEMENT, LUCKNOW",
+        "DR.AMBEDKAR INSTITUTE OF TECHNOLOGY FOR HANDICAPPEDS,KANPUR",
+        "RAJKIYA ENGINEERING COLLEGE, MIRZAPUR",
+        "RAJKIYA ENGINEERING COLLEGE,MAINPURI",
+        "UTTAR PRADESH TEXTILE TECHNOLOGY INSTITUTE,KANPUR",
+        "KIET GROUP OF INSTITUTIONS(KRISHNA INSTT. OF ENGG. & TECHNOLOGY),GHAZIABAD",
+        "DR.AMBEDKAR INSTITUTE OF TECHNOLOGY FOR HANDICAPPEDS,KANPUR"
+      ]
+    },
+    {
+      "user_id": "0dc2dca7-4f16-47a2-b7b4-d3c4b8bf3ce9",
+      "rank": 275000,
+      "category": "OPEN",
+      "timestamp": "2026-04-01T17:35:08.086437Z",
+      "results_count": 1761,
+      "rank_range": "1 - 3 Lakh",
+      "top_colleges": [
+        "NARAINA COLLEGE OF ENGINEERING & TECHNOLOGY,KANPUR",
+        "FACULTY OF ENGG, AGRA COLLEGE,AGRA",
+        "HIMALAYAN INSTITUTE OF TECHNOLOGY & MANAGEMENT,LUCKNOW",
+        "S.R.INSTITUTE OF MANAGEMENT & TECHNOLOGY,LUCKNOW",
+        "S.D.COLLEGE OF ENGINEERING & TECHNOLOGY,MUZAFFARNAGAR",
+        "KASHI INSTITUTE OF TECHNOLOGY,VARANASI",
+        "APEX INSTITUTE OF TECHNOLOGY,RAMPUR",
+        "BANSAL INSTITUTE OF ENGINEERING & TECHNOLOGY,LUCKNOW",
+        "BANSAL INSTITUTE OF ENGINEERING & TECHNOLOGY,LUCKNOW",
+        "RAMESHWARAM INSTITUTE OF TECHNOLOGY & MANAGEMENT,LUCKNOW"
+      ]
+    },
+    {
+      "user_id": "5fffcbd1-d1fb-435c-ab7b-1f1b9c4b24cc",
+      "rank": 400000,
+      "category": "OBC",
+      "timestamp": "2026-04-01T17:40:59.311699Z",
+      "results_count": 1010,
+      "rank_range": "3 - 5 Lakh",
+      "top_colleges": [
+        "R.R.INSTITUTE OF MODERN TECHNOLOGY,LUCKNOW",
+        "BANSAL INSTITUTE OF ENGINEERING & TECHNOLOGY,LUCKNOW",
+        "Baba Shaheb (Dr.) B R Ambedkar College of Agricultural Engineering and Technology, Etawah",
+        "UNITED COLLEGE OF ENGINEERING & RESEARCH,ALLAHABAD",
+        "ABES INSTITUTE OF TECHNOLOGY,GHAZIABAD",
+        "GOEL INSTITUTE OF TECHNOLOGY & MANAGEMENT,LUCKNOW",
+        "BABU BANARASI DAS INSTITUTE OF TECHNOLOGY AND MANAGEMENT, LUCKNOW",
+        "BABU BANARASI DAS NORTHERN INDIA INSTITUTE OF TECHNOLOGY,LUCKNOW",
+        "S.R.INSTITUTE OF MANAGEMENT & TECHNOLOGY,LUCKNOW"
+      ]
+    },
+    {
+      "user_id": "69507b69-2f4c-4cbf-b4a4-53ec212cf1b0",
+      "rank": 350000,
+      "category": "OPEN",
+      "timestamp": "2026-04-01T17:50:38.305874Z",
+      "results_count": 3520,
+      "rank_range": "3 - 5 Lakh",
+      "top_colleges": [
+        "R.R.INSTITUTE OF MODERN TECHNOLOGY,LUCKNOW",
+        "FACULTY OF ENGG, AGRA COLLEGE,AGRA",
+        "KIPM COLLEGE OF ENGG. & TECHNOLOGY,GORAKHPUR",
+        "PRASAD INSTITUTE OF TECHNOLOGY,JAUNPUR",
+        "KALICHARAN NIGAM INSTITUTE OF TECHNOLOGY,BANDA",
+        "GOEL INSTITUTE OF TECHNOLOGY & MANAGEMENT,LUCKNOW",
+        "BANSAL INSTITUTE OF ENGINEERING & TECHNOLOGY,LUCKNOW",
+        "KASHI INSTITUTE OF TECHNOLOGY,VARANASI",
+        "Baba Shaheb (Dr.) B R Ambedkar College of Agricultural Engineering and Technology, Etawah"
+      ]
+    }
+  ]
+}

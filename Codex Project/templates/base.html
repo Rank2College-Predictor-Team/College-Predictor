@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKTU College Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="site-bg"></div>
+    <div class="page-shell">
+        <header class="navbar-wrap">
+            <nav class="navbar">
+                <a href="{{ url_for('index') }}" class="brand">
+                    <span class="brand__mark">A</span>
+                    <span class="brand__text">AKTU Predictor</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="{{ url_for('index') }}">Home</a>
+                    <a href="{{ url_for('disclaimer') }}">Disclaimer</a>
+                    <a href="{{ url_for('privacy') }}">Privacy</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="container flash-stack">
+                        {% for category, message in messages %}
+                            <div class="flash flash--{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-content">
+                <div>
+                    <p class="footer-brand">AKTU Predictor</p>
+                    <p class="footer-copy">Smarter counselling guidance for AKTU aspirants.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="{{ url_for('disclaimer') }}">Disclaimer</a>
+                    <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+                </div>
+                <p class="footer-copy">&copy; 2026 AKTU College Predictor</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var animatedItems = document.querySelectorAll("[data-animate]");
+            if (!animatedItems.length || !("IntersectionObserver" in window)) {
+                animatedItems.forEach(function (item) {
+                    item.classList.add("is-visible");
+                });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries, currentObserver) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        currentObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.18,
+                rootMargin: "0px 0px -40px 0px"
+            });
+
+            animatedItems.forEach(function (item) {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

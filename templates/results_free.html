@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Rank2College — Prediction Results{% endblock %}
+{% block content %}
+<section class="results-section">
+    <div class="container-wide">
+        <div class="results-topbar">
+            <div>
+                <div class="eyebrow">YOUR PREDICTION</div>
+                <h1>AKTU College Results</h1>
+                <p>Refine your shortlist by round, college, branch or subcategory.</p>
+            </div>
+            <a class="secondary-btn" href="{{ url_for('home') }}#predictor">New Prediction</a>
+        </div>
+
+        <form class="filter-panel" method="GET" action="{{ url_for('free_results') }}">
+            <div class="filter-panel-head">
+                <div><strong>Filter results</strong><span>Choose one or more filters</span></div>
+                <span class="result-count-pill">{{ total_results }} result{% if total_results != 1 %}s{% endif %}</span>
+            </div>
+            <div class="filter-grid">
+                <div class="field">
+                    <label for="round">Round</label>
+                    <select class="searchable" id="round" name="round">
+                        <option value="">All Rounds</option>
+                        {% for item in rounds %}<option value="{{ item }}" {% if selected_round == item %}selected{% endif %}>{{ item }}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="college">College</label>
+                    <select class="searchable" id="college" name="college"><option value="">All Colleges</option>{% for item in colleges %}<option value="{{ item }}" {% if selected_college == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select>
+                </div>
+                <div class="field">
+                    <label for="branch">Branch</label>
+                    <select class="searchable" id="branch" name="branch"><option value="">All Branches</option>{% for item in branches %}<option value="{{ item }}" {% if selected_branch == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select>
+                </div>
+                <div class="field">
+                    <label for="subcat">Subcategory</label>
+                    <select class="searchable" id="subcat" name="subcat">
+                        <option value="">All Subcategories</option>
+                        <option value="AF" {% if selected_subcat == 'AF' %}selected{% endif %}>Armed Forces</option>
+                        <option value="FF" {% if selected_subcat == 'FF' %}selected{% endif %}>Freedom Fighter</option>
+                        <option value="Girl" {% if selected_subcat == 'Girl' %}selected{% endif %}>Girl Quota</option>
+                        <option value="PH" {% if selected_subcat == 'PH' %}selected{% endif %}>PwD</option>
+                        <option value="TF" {% if selected_subcat == 'TF' %}selected{% endif %}>Tuition Fee Waiver</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="primary-btn small-btn" type="submit">Apply Filters <span>→</span></button>
+                <a class="text-btn" href="{{ url_for('free_results') }}">Clear all</a>
+            </div>
+        </form>
+
+        <div class="results-meta">
+            <div><strong>{{ total_results }}</strong> matching results</div>
+            {% if total_results %}<span>Showing {{ showing_start }}–{{ showing_end }} · 20 per page</span>{% endif %}
+        </div>
+
+        {% if results %}
+        <div class="results-container">
+            {% for item in results %}
+            <article class="college-card {{ item.tag|lower }}">
+                <div class="card-topline"><span class="round-badge">{{ item.round }}</span><span class="tag {{ item.tag|lower }}">{{ item.tag }}</span></div>
+                <h2 class="college-name">{{ item.college }}</h2>
+                <div class="branch-name">{{ item.branch }}</div>
+                <div class="card-details">
+                    <div><span>Closing Rank</span><strong>{{ "{:,}".format(item.closing_rank) }}</strong></div>
+                    <div><span>Seat Type</span><strong>{{ item.subcategory }}</strong></div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        {% if total_pages > 1 %}
+        <nav class="pagination" aria-label="Results pages">
+            {% if page > 1 %}<a class="page-arrow" href="{{ url_for('free_results', page=page-1, **filter_params) }}">← <span>Previous</span></a>{% else %}<span class="page-arrow disabled">← <span>Previous</span></span>{% endif %}
+            {% set page_start = [1, page - 2]|max %}{% set page_end = [total_pages, page + 2]|min %}
+            {% if page_start > 1 %}<a href="{{ url_for('free_results', page=1, **filter_params) }}">1</a>{% if page_start > 2 %}<span class="ellipsis">…</span>{% endif %}{% endif %}
+            {% for p in range(page_start, page_end + 1) %}{% if p == page %}<span class="current">{{ p }}</span>{% else %}<a href="{{ url_for('free_results', page=p, **filter_params) }}">{{ p }}</a>{% endif %}{% endfor %}
+            {% if page_end < total_pages %}{% if page_end < total_pages - 1 %}<span class="ellipsis">…</span>{% endif %}<a href="{{ url_for('free_results', page=total_pages, **filter_params) }}">{{ total_pages }}</a>{% endif %}
+            {% if page < total_pages %}<a class="page-arrow" href="{{ url_for('free_results', page=page+1, **filter_params) }}"><span>Next</span> →</a>{% else %}<span class="page-arrow disabled"><span>Next</span> →</span>{% endif %}
+        </nav>
+        {% endif %}
+        {% else %}
+        <div class="empty-state"><div class="empty-icon">⌕</div><h2>No colleges found</h2><p>Try a different combination of filters or clear all filters.</p><a class="secondary-btn" href="{{ url_for('free_results') }}">Clear Filters</a></div>
+        {% endif %}
+
+        <div class="premium-banner"><div><span class="eyebrow">GO FURTHER</span><h2>Want more than a shortlist?</h2><p>Use premium insights for deeper branch-wise and counselling analysis.</p></div><a class="primary-btn" href="#">Explore Premium <span>→</span></a></div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="landing-hero">
+    <div class="container landing-hero__content">
+        <span class="eyebrow">Premium EdTech guidance</span>
+        <h1>Predict Your AKTU College Instantly</h1>
+        <p class="landing-hero__subtitle">
+            Discover likely colleges, branches, and admission chances with a clean,
+            modern counselling experience built to help you decide faster.
+        </p>
+        <a href="#prediction-form" class="button button--primary landing-hero__cta">Start Prediction</a>
+    </div>
+</section>
+
+<section id="prediction-form" class="landing-form-section">
+    <div class="container landing-form-wrap">
+        <div class="section-intro section-intro--center">
+            <span class="section-kicker">Prediction panel</span>
+            <h2>Check Your Best-Fit Colleges</h2>
+            <p>Enter your details to generate a personalised AKTU college shortlist.</p>
+        </div>
+
+        <section class="input-card landing-form-card">
+            <form method="POST" action="{{ url_for('results') }}" class="predictor-form">
+                <div class="form-grid">
+                    <label class="field">
+                        <span>Rank</span>
+                        <input
+                            type="number"
+                            name="rank"
+                            min="1"
+                            placeholder="Enter your AKTU rank"
+                            value="{{ form_data.rank if form_data else '' }}"
+                            required
+                        >
+                    </label>
+
+                    <label class="field">
+                        <span>Category</span>
+                        <select name="category" required>
+                            <option value="">Select category</option>
+                            {% for option in ['OPEN', 'OBC', 'SC', 'ST', 'EWS'] %}
+                                <option value="{{ option }}" {% if form_data and form_data.category == option %}selected{% endif %}>{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+
+                    <label class="field">
+                        <span>Gender</span>
+                        <select name="gender" required>
+                            <option value="">Select gender</option>
+                            {% for option in ['Male', 'Female'] %}
+                                <option value="{{ option }}" {% if form_data and form_data.gender == option %}selected{% endif %}>{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+
+                    <label class="field">
+                        <span>Home State</span>
+                        <select name="home_state" required>
+                            <option value="">Select state quota</option>
+                            <option value="UP" {% if form_data and form_data.home_state == 'UP' %}selected{% endif %}>UP</option>
+                            <option value="Other" {% if form_data and form_data.home_state == 'Other' %}selected{% endif %}>Other</option>
+                        </select>
+                    </label>
+                </div>
+
+                <button type="submit" class="button button--primary button--full">Predict Now</button>
+            </form>
+        </section>
+    </div>
+</section>
+
+<section class="landing-features">
+    <div class="container showcase-section">
+        <div class="section-intro section-intro--center fade-in" data-animate>
+            <span class="section-kicker">Why students use it</span>
+            <h2>Built for smart counselling decisions</h2>
+            <p>Everything is designed to make your shortlist easier to understand and easier to act on.</p>
+        </div>
+
+        <div class="showcase-grid">
+            <article class="showcase-card card fade-in" data-animate>
+                <div class="showcase-card__top">
+                    <div class="icon-circle feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" class="feature-icon__svg">
+                            <path d="M13 2L5 13h5l-1 9 8-11h-5l1-9z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="showcase-card__body">
+                    <h3>Instant shortlist generation</h3>
+                    <p>Get filtered college predictions using your category, gender, and state quota in seconds.</p>
+                </div>
+            </article>
+
+            <article class="showcase-card card fade-in" data-animate>
+                <div class="showcase-card__top">
+                    <div class="icon-circle feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" class="feature-icon__svg">
+                            <path d="M4 19h16v2H2V3h2v16zm4-2H6v-6h2v6zm5 0h-2V7h2v10zm5 0h-2V10h2v7z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="showcase-card__body">
+                    <h3>Rank-aware status insights</h3>
+                    <p>Each result is classified as Safe, Moderate, or Dream for easy counselling planning.</p>
+                </div>
+            </article>
+
+            <article class="showcase-card card fade-in" data-animate>
+                <div class="showcase-card__top">
+                    <div class="icon-circle feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" class="feature-icon__svg">
+                            <path d="M12 2a10 10 0 1010 10h-2a8 8 0 11-8-8V2zm0 4a6 6 0 106 6h-2a4 4 0 11-4-4V6zm7-3l3 3-8 8-3-3 8-8z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="showcase-card__body">
+                    <h3>Choice filling confidence</h3>
+                    <p>Unlock probability analysis, recommended ordering, and a downloadable counselling PDF.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="recommended-section">
+    <div class="container">
+        <div class="section-intro section-intro--center fade-in" data-animate>
+            <span class="section-kicker">Top picks</span>
+            <h2>Top Recommended Colleges</h2>
+            <p>Popular choices students often consider when looking for strong outcomes and better confidence.</p>
+        </div>
+
+        <div class="recommended-grid">
+            <article class="recommended-card card top-pick fade-in" data-animate>
+                <span class="recommended-badge">Top Pick</span>
+                <h3>JSS Academy of Technical Education</h3>
+                <p class="recommended-branch">Computer Science and Engineering</p>
+                <div class="recommended-meta">
+                    <span class="tag tag--safe">Safe</span>
+                    <span class="pill">Best Choice</span>
+                </div>
+                <p class="recommended-copy">High probability for your rank with strong brand preference among students.</p>
+            </article>
+
+            <article class="recommended-card card fade-in" data-animate>
+                <span class="recommended-badge recommended-badge--soft">Recommended</span>
+                <h3>KIET Group of Institutions</h3>
+                <p class="recommended-branch">Information Technology</p>
+                <div class="recommended-meta">
+                    <span class="tag tag--safe">Safe</span>
+                    <span class="pill">Top Option</span>
+                </div>
+                <p class="recommended-copy">High probability for your rank with a balanced mix of demand and accessibility.</p>
+            </article>
+
+            <article class="recommended-card card fade-in" data-animate>
+                <span class="recommended-badge recommended-badge--soft">Recommended</span>
+                <h3>Ajay Kumar Garg Engineering College</h3>
+                <p class="recommended-branch">Electronics and Communication Engineering</p>
+                <div class="recommended-meta">
+                    <span class="tag tag--moderate">Best Choice</span>
+                    <span class="pill">Strong Fit</span>
+                </div>
+                <p class="recommended-copy">Strong option for aspirants targeting a competitive shortlist with good upside.</p>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}

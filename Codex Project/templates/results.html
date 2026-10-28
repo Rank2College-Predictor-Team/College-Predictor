@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <div class="page-header">
+            <div>
+                <span class="section-kicker">Free Results</span>
+                <h1 class="page-title">Your predicted AKTU colleges</h1>
+                <p class="page-subtitle">Browse your shortlist in a clean card view and refine it using subcategory filters.</p>
+            </div>
+            <div class="summary-strip">
+                <span>Rank: {{ candidate.rank }}</span>
+                <span>Category: {{ candidate.category }}</span>
+                <span>Gender: {{ candidate.gender }}</span>
+                <span>Quota: {{ 'Home State' if candidate.home_state == 'UP' else 'All India' }}</span>
+            </div>
+        </div>
+
+        <section class="panel">
+            <div class="toolbar">
+                <form method="GET" action="{{ url_for('results') }}" class="filter-bar">
+                    <label class="field field--compact">
+                        <span>Subcategory</span>
+                        <select name="subcategory" onchange="this.form.submit()">
+                            <option value="">All subcategories</option>
+                            {% for option in subcategory_options %}
+                                {% if option.value in available_subcategories %}
+                                    <option value="{{ option.value }}" {% if subcategory == option.value %}selected{% endif %}>
+                                        {{ option.label }}
+                                    </option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </label>
+                </form>
+
+                <div class="toolbar-actions">
+                    <span class="muted-note">{{ total_results }} total matches</span>
+                    <a href="{{ url_for('premium_results') }}" class="button button--secondary">Explore Premium</a>
+                </div>
+            </div>
+
+            {% if predictions %}
+                <div class="card-grid results-grid">
+                    {% for item in predictions %}
+                        <article class="result-card">
+                            <div class="result-card__top">
+                                <span class="tag tag--{{ item.status|lower }}">{{ item.status }}</span>
+                                <span class="pill">{{ item.subcategory_label }}</span>
+                            </div>
+
+                            <div class="result-card__body">
+                                <h3>{{ item.college_name }}</h3>
+                                <p class="branch">{{ item.branch }}</p>
+                            </div>
+
+                            <div class="result-stats">
+                                <div class="stat-box">
+                                    <span class="label">Closing Rank</span>
+                                    <strong>{{ item.closing_rank }}</strong>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="label">Subcategory</span>
+                                    <strong>{{ item.category }}</strong>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="label">Seat Type</span>
+                                    <strong>{{ item.seat_gender }}</strong>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="label">Quota</span>
+                                    <strong>{{ item.quota }}</strong>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <h3>No colleges found</h3>
+                    <p>Try removing the filter or changing your rank and category inputs from the homepage.</p>
+                    <a href="{{ url_for('index') }}" class="button button--primary">Back to Home</a>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</section>
+{% endblock %}
